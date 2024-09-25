@@ -1,0 +1,17 @@
+﻿version: '3.8'
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: ShopEase
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./path_to_your_existing_db.sql:/docker-entrypoint-initdb.d/your_existing_db.sql
+
+volumes:
+  pgdata:
