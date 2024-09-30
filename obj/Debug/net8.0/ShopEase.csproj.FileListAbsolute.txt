@@ -139,3 +139,9 @@ D:\ShopEase\ShopEase\obj\Debug\net8.0\ShopEase.genruntimeconfig.cache
 D:\ShopEase\ShopEase\obj\Debug\net8.0\ref\ShopEase.dll
 D:\ShopEase\ShopEase\bin\Debug\net8.0\Npgsql.dll
 D:\ShopEase\ShopEase\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\ShopEase\ShopEase\obj\Debug\net8.0\ShopEase.sourcelink.json
+D:\ShopEase\ShopEase\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+D:\ShopEase\ShopEase\bin\Debug\net8.0\MailKit.dll
+D:\ShopEase\ShopEase\bin\Debug\net8.0\MimeKit.dll
+D:\ShopEase\ShopEase\bin\Debug\net8.0\NETCore.MailKit.dll
+D:\ShopEase\ShopEase\bin\Debug\net8.0\System.Formats.Asn1.dll

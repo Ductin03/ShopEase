@@ -13,6 +13,9 @@ namespace ClothingStore.Entities
         public string Description { get; set; }
 
         [Required]
+        public int quantity { get; set; }
+
+        [Required]
         public Guid CategoryId { get; set; }
 
         [Required]

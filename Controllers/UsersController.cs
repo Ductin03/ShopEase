@@ -25,9 +25,9 @@ namespace ClothingStore.Controllers
         /// 
         [AuthorizeRoles(RoleModels.Admin)]
         [HttpGet("")]
-        public async Task<IActionResult> GetAllUser()
+        public async Task<IActionResult> GetAllUser([FromQuery] GetUserRequestModel request)
         {
-            return Ok(await _userServices.GetAllUsersAsync());
+            return Ok(await _userServices.GetAllUsersAsync(request));
         }
 
         /// <summary>
@@ -75,6 +75,13 @@ namespace ClothingStore.Controllers
             await _userServices.DeleteUserAsync(userid);
             return Ok(userid);
 
+        }
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetInfoUser([FromRoute] Guid userId)
+        {
+
+            return Ok(await _userServices.GetUsersDetails(userId));
+            
         }
     }
 }

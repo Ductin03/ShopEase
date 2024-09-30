@@ -9,6 +9,10 @@ namespace ClothingStore.UnitOfWork
         IUserRepository userRepository { get; }
         ICategoryRepository categoryRepository { get; }
         IProductRepository productRepository { get; }
+        IVerificationRepository verificationRepository { get; }
+        ICartRepository cartRepository { get; }
+        IOrderRepository orderRepository { get; }
+
         Task SaveChangeAsync();
         
     }

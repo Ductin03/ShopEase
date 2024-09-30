@@ -48,9 +48,14 @@ namespace ShopEase.Controllers
         /// 
         [AuthorizeRoles(RoleModels.Admin)]
         [HttpGet]
-        public async Task<IActionResult> GetAllProduct()
+        public async Task<IActionResult> GetAllProduct([FromQuery] GetProductRequestModel request)
         {
-            return Ok(await _productServices.GetAllProductAsync());
+            return Ok(await _productServices.GetAllProductAsync(request));
+        }
+        [HttpGet("category")]
+        public async Task<IActionResult> GetByCategory(Guid categoryid)
+        {
+            return Ok(await _productServices.GetByCategoryAsync(categoryid));
         }
 
         [AuthorizeRoles(RoleModels.Admin)]

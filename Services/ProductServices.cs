@@ -2,6 +2,7 @@
 using ClothingStore.UnitOfWork;
 using ShopEase.Entities;
 using ShopEase.Models.RequestModels;
+using ShopEase.Models.ResponseModel;
 
 namespace ShopEase.Services
 {
@@ -28,6 +29,7 @@ namespace ShopEase.Services
             product.Id = Guid.NewGuid();
             product.ProductName = model.ProductName;
             product.Price = model.Price;
+            product.quantity = model.Quantity;
             product.Description = model.Description;
             product.CategoryId = model.CategoryId;
             product.SellerId = model.SellerId;
@@ -51,10 +53,20 @@ namespace ShopEase.Services
             await _unitOfWork.SaveChangeAsync();
         }
 
-        public async Task<List<Products>> GetAllProductAsync()
+        public async Task<BasePanigationResponModel<Products>> GetAllProductAsync(GetProductRequestModel model)
         {
-           return await _unitOfWork.productRepository.GetAllProduct();
+           return await _unitOfWork.productRepository.GetAllProduct(model);
             
+        }
+
+        public async Task<List<Products>> GetByCategoryAsync(Guid categoryId)
+        {
+            var categoryExist=await _unitOfWork.categoryRepository.GetByCategoryId(categoryId);
+            if(categoryExist == null)
+            {
+                throw new Exception("Category Not Exist");
+            }
+            return await _unitOfWork.productRepository.GetByCategory(categoryId);
         }
 
         public async Task UpdateProductAsync(UpdateProductRequestModel model)
@@ -71,6 +83,7 @@ namespace ShopEase.Services
             }
             productExist.ProductName = model.ProductName;
             productExist.Price = model.Price;
+            productExist.quantity = model.Quantity;
             productExist.Description = model.Description;
             productExist.CategoryId = model.CategoryId;
             productExist.SellerId = model.SellerId;

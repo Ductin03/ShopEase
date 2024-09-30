@@ -2,8 +2,11 @@
 using ClothingStore.Models.RequestModels;
 using ClothingStore.UnitOfWork;
 using Microsoft.IdentityModel.Tokens;
+using ShopEase.Entities;
 using ShopEase.Models.RequestModels;
+using ShopEase.Models.ResponseModel;
 using System.IdentityModel.Tokens.Jwt;
+using System.Runtime.ConstrainedExecution;
 using System.Security.Claims;
 using System.Text;
 
@@ -67,15 +70,24 @@ namespace ClothingStore.Services
             user.Email = model.Email;
             user.RoleId = model.RoleId;
             user.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
-            user.Phone= model.Phone;
-            user.BirthDay = model.BirthDay;
-            user.Avatar= model.Avatar;
             user.CreateDate = DateTime.UtcNow;
             user.CreateBy = model.CreateBy;
-            user.Address= model.Address;
             user.IsDeleted = false;
             await _unitOfWork.userRepository.CreateUser(user);
-            await _unitOfWork.SaveChangeAsync();
+            foreach (var items in model.CreateUserDetailsRequestModel) {
+                var userDetails = new UserDetails();
+                userDetails.UserId = user.Id;
+                userDetails.FullName = items.FullName;
+                userDetails.PhoneNumber=items.Phone;
+                userDetails.CreateBy = user.CreateBy;
+                userDetails.Gender = items.Gender;
+                userDetails.Avartar=items.Avatar;
+                userDetails.Address= items.Address;
+                userDetails.Position= items.Position;
+                userDetails.CreateDate=DateTime.UtcNow;
+                await _unitOfWork.userRepository.CreateUserDetails(userDetails);
+ }        
+        await _unitOfWork.SaveChangeAsync();
         }
 
         public async Task DeleteUserAsync(Guid userid)
@@ -89,9 +101,14 @@ namespace ClothingStore.Services
             await _unitOfWork.SaveChangeAsync();
         }
 
-        public async Task<List<Users>> GetAllUsersAsync()
+        public async Task<BasePanigationResponModel<Users>> GetAllUsersAsync(GetUserRequestModel getUserRequestModel)
         {
-            return await _unitOfWork.userRepository.GetAllUsers();
+            return await _unitOfWork.userRepository.GetAllUsers(getUserRequestModel);
+        }
+
+        public async Task<List<UserDetails>> GetUsersDetails(Guid userId)
+        {
+            return await _unitOfWork.userRepository.userDetailResponses(userId);
         }
 
         public async Task UpdateUser(UpdateUserRequestModel model)
@@ -108,10 +125,6 @@ namespace ClothingStore.Services
 
             userExist.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
             userExist.Email = model.Email;
-            userExist.Address = model.Address;
-            userExist.Phone = model.Phone;
-            userExist.BirthDay = model.BirthDay;
-            userExist.Avatar = model.Avatar;
             userExist.UpdateDate = DateTime.UtcNow;
             userExist.UpdateBy= model.UpdateBy;
             userExist.RoleId = model.RoleId;

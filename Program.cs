@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ShopEase.Models.RequestModels;
 using ShopEase.Repository;
 using ShopEase.Services;
 using System.Text;
@@ -14,6 +15,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<ShopEaseDbContext>(item => item.UseNpgsql("Host=localhost;Database=ShopEase;Username=postgres;Password=123456"));
+
+builder.Services.Configure<EmailSettingModel>(builder.Configuration.GetSection("Emailsettings"));
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();
@@ -31,6 +35,17 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductServices, ProductServices>();
+
+builder.Services.AddScoped<IVerificationRepository, VerificationRepository>();
+builder.Services.AddScoped<IForgetPasswordServices, ForgetPasswordServices>();
+
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<ICartServices, CartServices>();
+
+
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderServices, OrderServices>();
+
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
