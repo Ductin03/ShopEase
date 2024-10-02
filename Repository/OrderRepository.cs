@@ -15,8 +15,8 @@ namespace ShopEase.Repository
 
         public async Task<OrderSumResponseRequestModel> GetOrder(Guid userId)
         {
-            var viewOrders = await (from o in _context.Oders
-                             join od in _context.OderDetails on o.Id equals od.OderId
+            var viewOrders = await (from o in _context.Orders
+                             join od in _context.OrderDetails on o.Id equals od.OderId
                              join p in _context.Products on od.ProductId equals p.Id
                              where o.UserId == userId
                              select new
@@ -54,16 +54,16 @@ namespace ShopEase.Repository
 
         }
 
-        public  Task Oder(Oder oder)
+        public  Task Oder(Order oder)
         {
-            _context.Oders.Add(oder);
+            _context.Orders.Add(oder);
             return  Task.FromResult(true);
             
         }
 
-        public Task OderDetail(OderDetails oderDetails)
+        public Task OderDetail(OrderDetail oderDetails)
         {
-            _context.OderDetails.Add(oderDetails);
+            _context.OrderDetails.Add(oderDetails);
             return Task.FromResult(true);
               
         }

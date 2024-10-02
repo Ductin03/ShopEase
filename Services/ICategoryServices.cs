@@ -6,7 +6,7 @@ namespace ShopEase.Services
     public interface ICategoryServices
     {
         Task CreateCategory(CreateCategoryRequestModel model);
-        Task<List<Categories>> GetAllCategories();
+        Task<List<Category>> GetAllCategories();
         Task DeleteCategory(Guid categoryId);
         Task UpdateCategory(UpdateCategoryRequestModel model);
     }

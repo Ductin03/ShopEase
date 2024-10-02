@@ -5,8 +5,8 @@ namespace ShopEase.Repository
 {
     public interface IOrderRepository
     {
-        public Task Oder(Oder oder);
-        public Task OderDetail(OderDetails oderDetails);
+        public Task Oder(Order oder);
+        public Task OderDetail(OrderDetail oderDetails);
         public Task<OrderSumResponseRequestModel> GetOrder(Guid UserID);
     }
 

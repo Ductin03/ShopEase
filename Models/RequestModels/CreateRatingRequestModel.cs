@@ -2,20 +2,20 @@
 
 namespace ShopEase.Models.RequestModels
 {
-    public class AddCartRequestModel
+    public class CreateRatingRequestModel
     {
         [Required]
         public Guid Id { get; set; }
         [Required]
-        public Guid ProductId { get; set; }
-        [Required]
         public Guid UserId { get; set; }
         [Required]
-        [Range(0, int.MaxValue)]
-        public Decimal Price { get; set; }
-        [Range(0, int.MaxValue)]
+        public Guid ProductId { get; set; }
         [Required]
-        public int Quantity { get; set; }
+        [Range(0, 5)]
+        public int Point { get; set; }
+        [Required]
+        [MaxLength(250)]
+        public string Comment { get; set; }
         [Required]
         public DateTime CreatedOn { get; set; }
         [Required]

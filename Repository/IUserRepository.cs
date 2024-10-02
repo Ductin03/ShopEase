@@ -7,17 +7,17 @@ namespace ClothingStore.Repository
 {
     public interface IUserRepository
     {
-        Task CreateUser(Users users);
-        Task CreateUserDetails(UserDetails userDetails);
-        Task<List<UserDetails>> userDetailResponses(Guid userId);
-        Task<Users> GetByUserName(string username);
-        Task<Users> GetByUserId(Guid userId);
+        Task CreateUser(User users);
+        Task CreateUserDetails(UserDetail userDetails);
+        Task<List<UserDetail>> userDetailResponses(Guid userId);
+        Task<User> GetByUserName(string username);
+        Task<User> GetByUserId(Guid userId);
         Task<string> GetRoleName(string username);
-        Task UpdateUser(Users users);
-        Task<BasePanigationResponModel<Users>> GetAllUsers(GetUserRequestModel getUserRequestModel);
-        Task DeleteUser(Users users);
+        Task UpdateUser(User users);
+        Task<BasePanigationResponModel<User>> GetAllUsers(GetUserRequestModel getUserRequestModel);
+        Task DeleteUser(User users);
 
-        Task<Users> GetByEmail(string email);
+        Task<User> GetByEmail(string email);
     }
 
 }

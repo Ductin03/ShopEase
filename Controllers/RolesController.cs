@@ -38,7 +38,7 @@ namespace ClothingStore.Controllers
 
             Guid.TryParse(userIdClaim, out Guid result);
 
-            request.CreateBy = result;
+            request.CreatedBy = result;
 
             await _roleService.Role(request);
             return Ok(request);
@@ -50,7 +50,7 @@ namespace ClothingStore.Controllers
 
             Guid.TryParse(userIdClaim, out Guid result);
 
-            request.UpdateBy = result;
+            request.UpdatedBy = result;
 
             request.RoleId=roleid;
             await _roleService.UpdateRoleAsync(request);
@@ -60,7 +60,7 @@ namespace ClothingStore.Controllers
         public async Task<IActionResult> DeleteRole([FromRoute] Guid roleid)
         {
             await _roleService.DeleteRoleAsync(roleid);
-            return Ok(roleid);
+            return Ok(true);
         }
     }
 }

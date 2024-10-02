@@ -38,7 +38,7 @@ namespace ClothingStore.Services
                     {
                         new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                         new Claim(ClaimTypes.Email, user.Email.ToString()),
-                        new Claim("RoleName", role.ToString())   // Custom Role ID claim
+                        new Claim("RoleName", role.ToString())
                     }),
                 Expires = DateTime.UtcNow.AddMinutes(30),
                 Issuer = _configuration["JwtSettings:Issuer"],
@@ -64,27 +64,27 @@ namespace ClothingStore.Services
             {
                 throw new Exception("Không tồn tại Role");
             }
-            var user = new Users();
+            var user = new User();
             user.Id = Guid.NewGuid();
             user.UserName = model.UserName;
             user.Email = model.Email;
             user.RoleId = model.RoleId;
             user.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
-            user.CreateDate = DateTime.UtcNow;
-            user.CreateBy = model.CreateBy;
+            user.CreatedOn = DateTime.UtcNow;
+            user.CreatedBy = model.CreatedBy;
             user.IsDeleted = false;
             await _unitOfWork.userRepository.CreateUser(user);
             foreach (var items in model.CreateUserDetailsRequestModel) {
-                var userDetails = new UserDetails();
+                var userDetails = new UserDetail();
                 userDetails.UserId = user.Id;
                 userDetails.FullName = items.FullName;
                 userDetails.PhoneNumber=items.Phone;
-                userDetails.CreateBy = user.CreateBy;
+                userDetails.CreatedBy = user.CreatedBy;
                 userDetails.Gender = items.Gender;
                 userDetails.Avartar=items.Avatar;
                 userDetails.Address= items.Address;
                 userDetails.Position= items.Position;
-                userDetails.CreateDate=DateTime.UtcNow;
+                userDetails.CreatedOn=DateTime.UtcNow;
                 await _unitOfWork.userRepository.CreateUserDetails(userDetails);
  }        
         await _unitOfWork.SaveChangeAsync();
@@ -101,12 +101,12 @@ namespace ClothingStore.Services
             await _unitOfWork.SaveChangeAsync();
         }
 
-        public async Task<BasePanigationResponModel<Users>> GetAllUsersAsync(GetUserRequestModel getUserRequestModel)
+        public async Task<BasePanigationResponModel<User>> GetAllUsersAsync(GetUserRequestModel getUserRequestModel)
         {
             return await _unitOfWork.userRepository.GetAllUsers(getUserRequestModel);
         }
 
-        public async Task<List<UserDetails>> GetUsersDetails(Guid userId)
+        public async Task<List<UserDetail>> GetUsersDetails(Guid userId)
         {
             return await _unitOfWork.userRepository.userDetailResponses(userId);
         }
@@ -125,8 +125,8 @@ namespace ClothingStore.Services
 
             userExist.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
             userExist.Email = model.Email;
-            userExist.UpdateDate = DateTime.UtcNow;
-            userExist.UpdateBy= model.UpdateBy;
+            userExist.UpdatedOn = DateTime.UtcNow;
+            userExist.UpdatedBy= model.UpdatedBy;
             userExist.RoleId = model.RoleId;
             userExist.IsDeleted = false;
             _unitOfWork.userRepository.UpdateUser(userExist);

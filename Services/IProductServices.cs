@@ -7,9 +7,10 @@ namespace ShopEase.Services
     public interface IProductServices
     {
         Task CreateProduct(CreateProductRequestModel model);
-        Task<BasePanigationResponModel<Products>> GetAllProductAsync(GetProductRequestModel model);
+        Task<BasePanigationResponModel<Product>> GetAllProductAsync(GetProductRequestModel model);
         Task DeleteProductAsync(Guid id);
         Task UpdateProductAsync(UpdateProductRequestModel model);
-        Task<List<Products>> GetByCategoryAsync(Guid categoryId);
+        Task<List<Product>> GetByCategoryAsync(Guid categoryId);
+        Task<ProductDetailResponseModel> GetProductDetailAsync(Guid productId);
     }
 }

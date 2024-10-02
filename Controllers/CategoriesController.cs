@@ -32,7 +32,7 @@ namespace ShopEase.Controllers
 
             Guid.TryParse(userIdClaim, out Guid result);
 
-            request.CreateBy = result;
+            request.CreatedBy = result;
             await _categoryServices.CreateCategory(request);
             return Ok(request);
         }
@@ -53,7 +53,7 @@ namespace ShopEase.Controllers
 
             Guid.TryParse(userIdClaim, out Guid result);
 
-            request.UpdateBy = result;
+            request.UpdatedBy = result;
 
             request.CategoryId = categoryid;
 
@@ -67,7 +67,7 @@ namespace ShopEase.Controllers
         public async Task<IActionResult> DeleteCategories([FromRoute] Guid categoryid)
         {
             await _categoryServices.DeleteCategory(categoryid);
-            return Ok(categoryid);
+            return Ok(true);
 
         }
     }

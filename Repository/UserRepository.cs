@@ -14,37 +14,37 @@ namespace ClothingStore.Repository
             _context = context;
         }
 
-        public Task CreateUser(Users users)
+        public Task CreateUser(User users)
         {
             _context.Users.Add(users);
             return Task.FromResult(true);
         }
 
-        public Task CreateUserDetails(UserDetails userDetails)
+        public Task CreateUserDetails(UserDetail userDetails)
         {
             _context.UserDetails.Add(userDetails);
             return Task.FromResult(true);   
         }
 
-        public Task DeleteUser(Users users)
+        public Task DeleteUser(User users)
         {
             _context.Users.Update(users);
             return Task.FromResult(true);
         }
 
-        public async Task<List<Users>> GetAllUsers()
+        public async Task<List<User>> GetAllUsers()
         {
             return await _context.Users.ToListAsync();
         }
 
-        public async Task<BasePanigationResponModel<Users>> GetAllUsers(GetUserRequestModel getUserRequestModel)
+        public async Task<BasePanigationResponModel<User>> GetAllUsers(GetUserRequestModel getUserRequestModel)
         {
-            var query= _context.Users as IQueryable<Users>;
+            var query= _context.Users as IQueryable<User>;
             if (!string.IsNullOrWhiteSpace(getUserRequestModel.Keyword))
             {
                 query= query.Where(x=>x.UserName.Contains(getUserRequestModel.Keyword));
             }
-            query = query.OrderByDescending(x => x.CreateDate);
+            query = query.OrderByDescending(x => x.CreatedOn);
 
             var total = await query.CountAsync();
             if (getUserRequestModel.PageSize > 0)
@@ -53,21 +53,21 @@ namespace ClothingStore.Repository
             }
             var items = await query.ToListAsync();
 
-            return new BasePanigationResponModel<Users>(getUserRequestModel.PageIndex,getUserRequestModel.PageSize,total,items);
+            return new BasePanigationResponModel<User>(getUserRequestModel.PageIndex,getUserRequestModel.PageSize,total,items);
                 
         }
 
-        public async Task<Users> GetByEmail(string email)
+        public async Task<User> GetByEmail(string email)
         {
             return await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
         }
 
-        public async Task<Users> GetByUserId(Guid userId)
+        public async Task<User> GetByUserId(Guid userId)
         {
             return await _context.Users.FirstOrDefaultAsync(x => x.Id == userId);
         }
 
-        public async Task<Users> GetByUserName(string username)
+        public async Task<User> GetByUserName(string username)
         {
            return await _context.Users.FirstOrDefaultAsync(x=>x.UserName == username);
         }
@@ -79,13 +79,13 @@ namespace ClothingStore.Repository
                                         FirstOrDefault(r => r.Id == u.RoleId).RoleName).FirstOrDefaultAsync();
         }
 
-        public Task UpdateUser(Users users)
+        public Task UpdateUser(User users)
         {
              _context.Users.Update(users);
             return Task.FromResult(true);
         }
 
-        public async Task<List<UserDetails>> userDetailResponses(Guid userId)
+        public async Task<List<UserDetail>> userDetailResponses(Guid userId)
         {
             return await _context.UserDetails.Where(x=>x.UserId==userId).ToListAsync();
 

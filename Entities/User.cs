@@ -2,10 +2,10 @@
 
 namespace ClothingStore.Entities
 {
-    public class Users : BaseEntity
+    public class User : BaseEntity
     {
         [Required]
-        [MaxLength(250)]
+        [MaxLength(50)]
         public string UserName { get; set; }
 
         [Required]

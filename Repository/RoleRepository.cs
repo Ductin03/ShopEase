@@ -10,29 +10,29 @@ namespace ClothingStore.Repository
         {
             _context = context;
         }
-        public Task CreateRole(Roles roles)
+        public Task CreateRole(Role roles)
         {
             _context.Roles.Add(roles);
             return Task.FromResult(true);
         }
 
-        public Task DeleteRole(Roles role)
+        public Task DeleteRole(Role role)
         {
             _context.Roles.Update(role);
             return Task.FromResult(true);
         }
 
-        public async Task<List<Roles>> GetAllRoles()
+        public async Task<List<Role>> GetAllRoles()
         {
             return await _context.Roles.ToListAsync();
         }
 
-        public async Task<Roles> GetByRoleId(Guid RoleId)
+        public async Task<Role> GetByRoleId(Guid RoleId)
         {
             return await _context.Roles.FirstOrDefaultAsync(x=>x.Id==RoleId);
         }
 
-        public Task UpdateRole(Roles role)
+        public Task UpdateRole(Role role)
         {
             _context.Roles.Update(role);
             return Task.FromResult(true);

@@ -4,11 +4,11 @@ namespace ClothingStore.Repository
 {
     public interface IRoleRepository
     {
-        Task CreateRole(Roles roles);
-        Task<List<Roles>> GetAllRoles();
-        Task<Roles> GetByRoleId(Guid RoleId);
-        Task DeleteRole(Roles role);
-        Task UpdateRole(Roles role);
+        Task CreateRole(Role roles);
+        Task<List<Role>> GetAllRoles();
+        Task<Role> GetByRoleId(Guid RoleId);
+        Task DeleteRole(Role role);
+        Task UpdateRole(Role role);
         
     }
 }

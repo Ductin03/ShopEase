@@ -24,14 +24,14 @@ namespace ShopEase.Services
             {
                 throw new Exception("không đủ số lượng");
             }
-            var addCart = new AddCart();
+            var addCart = new Cart();
             addCart.Id=Guid.NewGuid();
             addCart.ProductId = model.ProductId;
             addCart.Quantity = model.Quantity == 0 ? 1 : model.Quantity;
             addCart.Price= model.Price;
             addCart.UserId = model.UserId;
-            addCart.CreateBy = model.CreateBy;
-            addCart.CreateDate = DateTime.UtcNow;
+            addCart.CreatedBy = model.CreatedBy;
+            addCart.CreatedOn = DateTime.UtcNow;
             addCart.IsDeleted=false;
             _unitOfWork.cartRepository.AddCart(addCart);
              await _unitOfWork.SaveChangeAsync();

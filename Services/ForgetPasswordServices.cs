@@ -81,7 +81,7 @@ namespace ShopEase.Services
             return emailBody;
         }
 
-        public async Task<Users> ResetPassword(string email, string otp, string NewPassword)
+        public async Task<User> ResetPassword(string email, string otp, string NewPassword)
         {
             var checkEmail = await _unitOfWork.userRepository.GetByEmail(email);
             if (checkEmail is null)

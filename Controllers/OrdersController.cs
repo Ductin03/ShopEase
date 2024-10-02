@@ -16,7 +16,7 @@ namespace ShopEase.Controllers
             _orderServices = orderServices;
         }
         [HttpPost]
-        public async Task<IActionResult> Order(OderModel request)
+        public async Task<IActionResult> Order(OrderModel request)
         {
             var user= User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if(Guid.TryParse(user, out Guid userId))

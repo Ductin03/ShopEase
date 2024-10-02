@@ -20,7 +20,7 @@ namespace ShopEase.Services
             
         }
 
-        public async Task Order(OderModel model)
+        public async Task Order(OrderModel model)
         {
             foreach (var items in model.OrderModels)
             {
@@ -37,19 +37,19 @@ namespace ShopEase.Services
                     throw new Exception("Không tồn tại sản phẩm");
                 }
             }
-            var Oder = new Oder();
+            var Oder = new Order();
             Oder.Id= Guid.NewGuid();
             Oder.ODerId = Guid.NewGuid();
             Oder.Quantity= model.OrderModels.Count;
             Oder.UserId = model.UserId;
             Oder.Price=model.OrderModels.Sum(x => x.Price* x.Quantity);
             Oder.Status = "Pending";
-            Oder.CreateBy = model.UserId;
-            Oder.CreateDate = DateTime.UtcNow;
+            Oder.CreatedBy = model.UserId;
+            Oder.CreatedOn = DateTime.UtcNow;
             await _unitOfWork.orderRepository.Oder(Oder);
             foreach(var item in model.OrderModels)
             {
-                var orderDetails = new OderDetails();
+                var orderDetails = new OrderDetail();
                 orderDetails.OderId = Oder.Id;
                 orderDetails.ProductId = item.ProductId;
                 orderDetails.Quantity = item.Quantity;

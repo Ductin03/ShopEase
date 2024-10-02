@@ -4,11 +4,11 @@ namespace ShopEase.Repository
 {
     public interface ICategoryRepository
     {
-        Task CreateCategory(Categories categories);
-        Task<Categories> GetByCategoryId(Guid categoryId);
-        Task<List<Categories>> GetAllCategories();
-        Task DeleteCategory(Categories categories);
-        Task UpdateCategory(Categories categories);
+        Task CreateCategory(Category categories);
+        Task<Category> GetByCategoryId(Guid categoryId);
+        Task<List<Category>> GetAllCategories();
+        Task DeleteCategory(Category categories);
+        Task UpdateCategory(Category categories);
     }
 
 }

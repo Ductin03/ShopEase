@@ -46,6 +46,9 @@ builder.Services.AddScoped<ICartServices, CartServices>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderServices, OrderServices>();
 
+builder.Services.AddScoped<IRatingRepository, RatingRepository>();
+builder.Services.AddScoped<IRatingServices, RatingServices>();
+
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 

@@ -1,17 +1,18 @@
-﻿namespace ClothingStore.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ClothingStore.Entities
 {
     public abstract class BaseEntity
     {
+        [Required]
         public Guid Id { get; set; }
-
-        public DateTime CreateDate { get; set; }
-
-        public  Guid CreateBy { get; set; }
-
-        public DateTime? UpdateDate { get; set;}
-
-        public Guid? UpdateBy { get; set; }
-
+        [Required]
+        public DateTime CreatedOn { get; set; }
+        [Required]
+        public  Guid CreatedBy { get; set; }
+        public DateTime? UpdatedOn { get; set;}
+        public Guid? UpdatedBy { get; set; }
+        [Required]
         public bool IsDeleted { get; set; }
     }
 }

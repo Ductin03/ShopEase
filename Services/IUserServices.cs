@@ -10,10 +10,10 @@ namespace ClothingStore.Services
     public interface IUserServices
     {
         Task CreateUser(CreateUserRequestModel model);
-        Task<List<UserDetails>> GetUsersDetails(Guid userId);
+        Task<List<UserDetail>> GetUsersDetails(Guid userId);
         Task<string> Authentication(LoginRequestModel model);
         Task UpdateUser(UpdateUserRequestModel model);
-        Task<BasePanigationResponModel<Users>> GetAllUsersAsync(GetUserRequestModel model);
+        Task<BasePanigationResponModel<User>> GetAllUsersAsync(GetUserRequestModel model);
         Task DeleteUserAsync(Guid userid);
     }
 }

@@ -12,15 +12,15 @@ namespace ShopEase.Repository
         {
             _context = context;
         }
-        public Task AddCart(AddCart addCart)
+        public Task AddCart(Cart addCart)
         {
-            _context.AddCarts.Add(addCart);
+            _context.Carts.Add(addCart);
             return Task.FromResult(true);
         }
 
         public async Task<CartSumResponseModel> GetCart(Guid userid)
         {
-            var cart = await (from c in _context.AddCarts
+            var cart = await (from c in _context.Carts
                               join p in _context.Products on c.ProductId equals p.Id
                               where c.UserId == userid
                               select new
@@ -62,14 +62,14 @@ namespace ShopEase.Repository
             return response;
         }
 
-        public async Task<AddCart> GetByProductId(Guid id)
+        public async Task<Cart> GetByProductId(Guid id)
         {
-            return await _context.AddCarts.FirstOrDefaultAsync(x=>x.ProductId==id);
+            return await _context.Carts.FirstOrDefaultAsync(x=>x.ProductId==id);
         }
 
-        public Task UpdateCart(AddCart updateCart)
+        public Task UpdateCart(Cart updateCart)
         {
-            _context.AddCarts.Update(updateCart);
+            _context.Carts.Update(updateCart);
             return Task.FromResult(true);
         }
 

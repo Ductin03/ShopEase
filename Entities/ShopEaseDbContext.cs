@@ -10,15 +10,16 @@ namespace ClothingStore.Entities
         {
 
         }
-        public DbSet<Users> Users { get; set; }
-        public DbSet<UserDetails> UserDetails { get; set; }
-        public DbSet<Products> Products { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserDetail> UserDetails { get; set; }
+        public DbSet<Product> Products { get; set; }
         public DbSet<ProductAttribute> ProductAttributes { get; set; }
-        public DbSet<Categories> Categories { get; set; }
-        public DbSet<Roles> Roles { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Role> Roles { get; set; }
         public DbSet<Verification> Verification { get; set; }
-        public DbSet<AddCart> AddCarts { get; set; }
-        public DbSet<Oder> Oders { get; set; }
-        public DbSet<OderDetails> OderDetails { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
     }
 }

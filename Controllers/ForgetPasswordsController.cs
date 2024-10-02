@@ -18,7 +18,7 @@ namespace ShopEase.Controllers
         public async Task<IActionResult> SendOtp([FromQuery]string email)
         {
             await _forgetPasswordServices.SendOtpMail(email);
-            return Ok(email);
+            return Ok(true);
             
         }
         [HttpPost("reset-password")]

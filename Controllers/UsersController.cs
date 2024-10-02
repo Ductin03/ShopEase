@@ -41,10 +41,8 @@ namespace ClothingStore.Controllers
         public async Task<IActionResult> CreateUser(CreateUserRequestModel request)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
             Guid.TryParse(userIdClaim, out Guid result);
-
-            request.CreateBy = result;
+            request.CreatedBy = result;
 
             await _userServices.CreateUser(request);
             return Ok(request);
@@ -63,7 +61,7 @@ namespace ClothingStore.Controllers
 
             Guid.TryParse(userIdClaim, out Guid result);
 
-            request.UpdateBy = result;
+            request.UpdatedBy = result;
 
             request.UserId = userid;
             await _userServices.UpdateUser(request);
@@ -73,7 +71,7 @@ namespace ClothingStore.Controllers
         public async Task<IActionResult> DeleteUser([FromRoute] Guid userid)
         {
             await _userServices.DeleteUserAsync(userid);
-            return Ok(userid);
+            return Ok(true);
 
         }
         [HttpGet("{userId}")]

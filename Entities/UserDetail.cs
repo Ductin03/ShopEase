@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ShopEase.Entities
 {
-    public class UserDetails: BaseEntity
+    public class UserDetail: BaseEntity
     {
         [Required]
         public Guid UserId { get; set; }

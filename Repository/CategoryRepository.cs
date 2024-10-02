@@ -10,29 +10,29 @@ namespace ShopEase.Repository
         {
             _context = context;
         }
-        public Task CreateCategory(Categories categories)
+        public Task CreateCategory(Category categories)
         {
             _context.Categories.Add(categories);
             return Task.FromResult(true);
         }
 
-        public Task DeleteCategory(Categories categories)
+        public Task DeleteCategory(Category categories)
         {
             _context.Categories.Update(categories);
             return Task.FromResult(true);
         }
 
-        public Task<List<Categories>> GetAllCategories()
+        public Task<List<Category>> GetAllCategories()
         {
             return _context.Categories.ToListAsync();
         }
 
-        public async Task<Categories> GetByCategoryId(Guid categoryId)
+        public async Task<Category> GetByCategoryId(Guid categoryId)
         {
             return await _context.Categories.FirstOrDefaultAsync(x=>x.Id==categoryId);
         }
 
-        public Task UpdateCategory(Categories categories)
+        public Task UpdateCategory(Category categories)
         {
             _context.Categories.Update(categories);
             return Task.FromResult(true);

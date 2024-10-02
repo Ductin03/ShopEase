@@ -2,7 +2,7 @@
 
 namespace ShopEase.Entities
 {
-    public class OderDetails : BaseEntity
+    public class OrderDetail : BaseEntity
     {
         public Guid OderId { get; set; }
         public Guid ProductId { get; set; }

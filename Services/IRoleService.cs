@@ -7,7 +7,7 @@ namespace ClothingStore.Services
     public interface IRoleService
     {
         Task Role(CreateRoleRequestModel model);
-        Task<List<Roles>> GetAllRolesAsync();
+        Task<List<Role>> GetAllRolesAsync();
         Task DeleteRoleAsync(Guid roleId);
         Task UpdateRoleAsync(UpdateRoleRequestModel model);
        

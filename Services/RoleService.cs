@@ -28,19 +28,19 @@ namespace ClothingStore.Services
 
         }
 
-        public async Task<List<Roles>> GetAllRolesAsync()
+        public async Task<List<Role>> GetAllRolesAsync()
         {
             return await _unitOfWork.roleRepository.GetAllRoles();
         }
 
         public async Task Role(CreateRoleRequestModel model)
         {
-            var role = new Roles();
+            var role = new Role();
             role.Id = Guid.NewGuid();
             role.RoleName = model.RoleName;
             role.Description=model.Description;
-            role.CreateDate = DateTime.UtcNow;
-            role.CreateBy = model.CreateBy;
+            role.CreatedOn = DateTime.UtcNow;
+            role.CreatedBy = model.CreatedBy;
             role.IsDeleted = false;
             _unitOfWork.roleRepository.CreateRole(role);
             await _unitOfWork.SaveChangeAsync();
@@ -55,8 +55,8 @@ namespace ClothingStore.Services
             }
             roleExist.RoleName = model.RoleName;
             roleExist.Description = model.Description;
-            roleExist.UpdateDate = DateTime.UtcNow;
-            roleExist.UpdateBy = model.UpdateBy;
+            roleExist.UpdatedOn = DateTime.UtcNow;
+            roleExist.UpdatedBy = model.UpdatedBy;
             _unitOfWork.roleRepository.UpdateRole(roleExist);
             await _unitOfWork.SaveChangeAsync();
             

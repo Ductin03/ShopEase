@@ -25,7 +25,7 @@ namespace ShopEase.Services
                 throw new Exception("Người bán không tồn tại");
             }
 
-            var product = new Products();
+            var product = new Product();
             product.Id = Guid.NewGuid();
             product.ProductName = model.ProductName;
             product.Price = model.Price;
@@ -33,8 +33,8 @@ namespace ShopEase.Services
             product.Description = model.Description;
             product.CategoryId = model.CategoryId;
             product.SellerId = model.SellerId;
-            product.CreateBy = model.CreateBy;
-            product.CreateDate = DateTime.UtcNow;
+            product.CreatedBy = model.CreatedBy;
+            product.CreatedOn = DateTime.UtcNow;
             product.IsDeleted = false;
             _unitOfWork.productRepository.CreateProduct(product);
             await _unitOfWork.SaveChangeAsync();
@@ -53,13 +53,13 @@ namespace ShopEase.Services
             await _unitOfWork.SaveChangeAsync();
         }
 
-        public async Task<BasePanigationResponModel<Products>> GetAllProductAsync(GetProductRequestModel model)
+        public async Task<BasePanigationResponModel<Product>> GetAllProductAsync(GetProductRequestModel model)
         {
            return await _unitOfWork.productRepository.GetAllProduct(model);
             
         }
 
-        public async Task<List<Products>> GetByCategoryAsync(Guid categoryId)
+        public async Task<List<Product>> GetByCategoryAsync(Guid categoryId)
         {
             var categoryExist=await _unitOfWork.categoryRepository.GetByCategoryId(categoryId);
             if(categoryExist == null)
@@ -67,6 +67,16 @@ namespace ShopEase.Services
                 throw new Exception("Category Not Exist");
             }
             return await _unitOfWork.productRepository.GetByCategory(categoryId);
+        }
+
+        public async Task<ProductDetailResponseModel> GetProductDetailAsync(Guid productId)
+        {
+            var productExist = await _unitOfWork.productRepository.GetByIdProduct(productId);
+            if(productExist == null)
+            {
+                throw new Exception("Product Not Exist!!!");
+            }
+            return await _unitOfWork.productRepository.GetProductDetails(productId);
         }
 
         public async Task UpdateProductAsync(UpdateProductRequestModel model)
@@ -87,8 +97,8 @@ namespace ShopEase.Services
             productExist.Description = model.Description;
             productExist.CategoryId = model.CategoryId;
             productExist.SellerId = model.SellerId;
-            productExist.UpdateBy = model.UpdateBy;
-            productExist.UpdateDate = DateTime.UtcNow;
+            productExist.UpdatedBy = model.UpdatedBy;
+            productExist.UpdatedOn = DateTime.UtcNow;
             productExist.IsDeleted = false;
             _unitOfWork.productRepository.UpdateProduct(productExist);
             await _unitOfWork.SaveChangeAsync();

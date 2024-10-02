@@ -7,10 +7,10 @@ namespace ClothingStore.Controllers
 {
     [Route("api/admin/[controller]")]
     [ApiController]
-    public class LoginsController : ControllerBase
+    public class LoginController : ControllerBase
     {
         private readonly IUserServices _userServices;
-        public LoginsController(IUserServices userServices)
+        public LoginController(IUserServices userServices)
         {
             _userServices = userServices;
         }/// <summary>

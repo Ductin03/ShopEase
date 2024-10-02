@@ -12,6 +12,7 @@ namespace ClothingStore.UnitOfWork
         IVerificationRepository verificationRepository { get; }
         ICartRepository cartRepository { get; }
         IOrderRepository orderRepository { get; }
+        IRatingRepository ratingRepository { get; }
 
         Task SaveChangeAsync();
         

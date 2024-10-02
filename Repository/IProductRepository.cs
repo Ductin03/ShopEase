@@ -7,12 +7,13 @@ namespace ShopEase.Repository
 {
     public interface IProductRepository
     {
-        Task CreateProduct(Products products);
-        Task<BasePanigationResponModel<Products>> GetAllProduct(GetProductRequestModel getProductRequestModel);
+        Task CreateProduct(Product products);
+        Task<BasePanigationResponModel<Product>> GetAllProduct(GetProductRequestModel getProductRequestModel);
         //Task CreateProductAttribute(ProductAttribute productAttribute);
-        Task UpdateProduct(Products products);
-        Task DeleteProduct(Products products);
-        Task<Products> GetByIdProduct(Guid productId);
-        Task<List<Products>> GetByCategory(Guid categoryId);
+        Task UpdateProduct(Product products);
+        Task DeleteProduct(Product products);
+        Task<Product> GetByIdProduct(Guid productId);
+        Task<List<Product>> GetByCategory(Guid categoryId);
+        Task<ProductDetailResponseModel> GetProductDetails(Guid productId);
     }
 }

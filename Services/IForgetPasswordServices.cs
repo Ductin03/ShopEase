@@ -8,6 +8,6 @@ namespace ShopEase.Services
         Task SendEmail(MailRequest request);
         string GeneraterandomNumber();
         Task SendOtpMail(string UserMail);
-        Task<Users> ResetPassword(string email, string otp, string NewPassword);
+        Task<User> ResetPassword(string email, string otp, string NewPassword);
     }
 }

@@ -35,7 +35,7 @@ namespace ShopEase.Controllers
             if(Guid.TryParse(userIdClaim, out Guid result))
             {
                 request.SellerId = result;
-                request.CreateBy= result;
+                request.CreatedBy= result;
             }
             await _productServices.CreateProduct(request);
             return Ok(request);
@@ -52,6 +52,11 @@ namespace ShopEase.Controllers
         {
             return Ok(await _productServices.GetAllProductAsync(request));
         }
+        [HttpGet("{productId}")]
+        public async Task<IActionResult> GetProductDetail([FromRoute] Guid productId)
+        {
+            return Ok(await _productServices.GetProductDetailAsync(productId));
+        }
         [HttpGet("category")]
         public async Task<IActionResult> GetByCategory(Guid categoryid)
         {
@@ -66,7 +71,7 @@ namespace ShopEase.Controllers
 
             Guid.TryParse(userIdClaim, out Guid result);
 
-            request.UpdateBy = result;
+            request.UpdatedBy = result;
 
             request.ProductId = productId;
            
@@ -79,7 +84,7 @@ namespace ShopEase.Controllers
         public async Task<IActionResult> DeleteProduct([FromRoute] Guid productId)
         {
             await _productServices.DeleteProductAsync(productId);
-            return Ok(productId);
+            return Ok(true);
         }
     }
 }

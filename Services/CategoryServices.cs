@@ -13,13 +13,13 @@ namespace ShopEase.Services
         }
         public async Task CreateCategory(CreateCategoryRequestModel model)
         {
-            var categories = new Categories();
+            var categories = new Category();
             categories.Id=Guid.NewGuid();
             categories.CategoryName = model.CategoryName;
             categories.Description = model.Description;
             categories.SubCategoryId = model.SubCategoryId;
-            categories.CreateDate = DateTime.UtcNow;
-            categories.CreateBy = model.CreateBy;
+            categories.CreatedOn = DateTime.UtcNow;
+            categories.CreatedBy = model.CreatedBy;
             categories.IsDeleted = false;
             _unitOfWork.categoryRepository.CreateCategory(categories);
             await _unitOfWork.SaveChangeAsync();
@@ -38,7 +38,7 @@ namespace ShopEase.Services
             await _unitOfWork.SaveChangeAsync();
         }
 
-        public async Task<List<Categories>> GetAllCategories()
+        public async Task<List<Category>> GetAllCategories()
         {
             return await _unitOfWork.categoryRepository.GetAllCategories();
         }
@@ -50,10 +50,10 @@ namespace ShopEase.Services
                 throw new Exception("Khong ton tai category");
             }
             categoryExist.CategoryName= model.CategoryName;
-            categoryExist.UpdateDate = DateTime.UtcNow;
+            categoryExist.UpdatedOn = DateTime.UtcNow;
             categoryExist.Description = model.Description;
             categoryExist.SubCategoryId = model.SubCategoryId;
-            categoryExist.UpdateBy=model.UpdateBy;
+            categoryExist.UpdatedBy=model.UpdatedBy;
             _unitOfWork.categoryRepository.UpdateCategory(categoryExist);
             await _unitOfWork.SaveChangeAsync();
         }

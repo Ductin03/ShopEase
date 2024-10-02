@@ -2,7 +2,7 @@
 
 namespace ClothingStore.Entities
 {
-    public class Roles : BaseEntity
+    public class Role : BaseEntity
     {
         [Required]
         [MaxLength(250)]

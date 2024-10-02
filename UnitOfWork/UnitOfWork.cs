@@ -14,6 +14,7 @@ namespace ClothingStore.UnitOfWork
         private readonly IVerificationRepository _verificationRepository;
         private readonly ICartRepository _cartRepository;
         private readonly IOrderRepository _orderRepository;
+        private readonly IRatingRepository _ratingRepository;
         public UnitOfWork(ShopEaseDbContext context,
                           IRoleRepository roleRepository,
                           IUserRepository userRepository,
@@ -21,7 +22,8 @@ namespace ClothingStore.UnitOfWork
                           IProductRepository productRepository,
                           IVerificationRepository verificationRepository,
                           ICartRepository cartRepository,
-                          IOrderRepository orderRepository
+                          IOrderRepository orderRepository,
+                          IRatingRepository ratingRepository
             ) { 
             _context = context;
             _roleRepository = roleRepository;
@@ -31,6 +33,7 @@ namespace ClothingStore.UnitOfWork
             _verificationRepository = verificationRepository;
             _cartRepository = cartRepository;
             _orderRepository = orderRepository;
+            _ratingRepository = ratingRepository;   
         }
         public IRoleRepository roleRepository => _roleRepository;
 
@@ -45,6 +48,8 @@ namespace ClothingStore.UnitOfWork
         public ICartRepository cartRepository => _cartRepository;
 
         public IOrderRepository orderRepository => _orderRepository;
+
+        public IRatingRepository ratingRepository => _ratingRepository;
 
         public async Task SaveChangeAsync()
         {
